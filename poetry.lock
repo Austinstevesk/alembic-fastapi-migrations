@@ -101,6 +101,18 @@ starlette = ">=0.27.0,<0.28.0"
 all = ["email-validator (>=1.1.1)", "httpx (>=0.23.0)", "itsdangerous (>=1.1.0)", "jinja2 (>=2.11.2)", "orjson (>=3.2.1)", "python-multipart (>=0.0.5)", "pyyaml (>=5.3.1)", "ujson (>=4.0.1,!=4.0.2,!=4.1.0,!=4.2.0,!=4.3.0,!=5.0.0,!=5.1.0)", "uvicorn[standard] (>=0.12.0)"]
 
 [[package]]
+name = "geoalchemy2"
+version = "0.13.3"
+description = "Using SQLAlchemy with Spatial Databases"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+packaging = "*"
+SQLAlchemy = ">=1.4"
+
+[[package]]
 name = "greenlet"
 version = "2.0.2"
 description = "Lightweight in-process concurrent programming"
@@ -164,7 +176,7 @@ python-versions = ">=3.7"
 name = "packaging"
 version = "23.1"
 description = "Core utilities for Python packages"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 
@@ -324,7 +336,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "6b0759ef992cc121f5c592211ee1663b1d1a41980bcdb3bf188fc93c871a819b"
+content-hash = "7e5e58d9faf1b780b6e28c80716c8c3dacd9abdc6c85ad919023ee9acd9374ba"
 
 [metadata.files]
 alembic = []
@@ -335,6 +347,7 @@ click = []
 colorama = []
 exceptiongroup = []
 fastapi = []
+geoalchemy2 = []
 greenlet = []
 h11 = []
 idna = []

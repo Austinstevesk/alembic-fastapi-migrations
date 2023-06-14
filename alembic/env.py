@@ -8,6 +8,7 @@ from alembic import context
 from db_migration.db.sql import Base
 from db_migration.models.users import User
 from db_migration.models.posts import Post
+from db_migration.models.main import (WeatherSource)
 
 # this is the Alembic Config object, which provides
 # access to the val ues within the .ini file in use.

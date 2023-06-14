@@ -1,9 +1,10 @@
 from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
+from geoalchemy2 import Geometry
 
 from .db.sql import engine, get_db
-from .models import posts
+from .models import posts, main
 
 
 app = FastAPI()
@@ -35,14 +36,25 @@ class PostOut(Post):
     class Config:
         orm_mode = True
         
+
+class WeatherSource(BaseModel):
+    location:Geometry
+    location_name: str
+    source_type =str
+    source_name = str
+    
+    class Config:
+        arbitrary_types_allowed = True
+        orm_mode = True
+        
 @app.get("/")
 def root():
     return {"message": "success"}
 
 
 @app.post("/add", response_model=PostOut)
-def add_post(post: Post, db: Session = Depends(get_db)):
-    new_post = posts.Post(**post.dict(), owner_id=1)
+def add_post(post: WeatherSource, db: Session = Depends(get_db)):
+    new_post = main.WeatherSource(**post.dict(), owner_id=1)
     db.add(new_post)
     db.commit()
     db.refresh(new_post)
