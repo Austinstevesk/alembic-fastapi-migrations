@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from geoalchemy2 import Geometry
 
 from .db.sql import engine, get_db
-from .models import posts, main
+from .models import posts
 
 
 app = FastAPI()
@@ -53,8 +53,8 @@ def root():
 
 
 @app.post("/add", response_model=PostOut)
-def add_post(post: WeatherSource, db: Session = Depends(get_db)):
-    new_post = main.WeatherSource(**post.dict(), owner_id=1)
+def add_post(post: posts.Post, db: Session = Depends(get_db)):
+    new_post = posts.Post(**post.dict(), owner_id=1)
     db.add(new_post)
     db.commit()
     db.refresh(new_post)
@@ -67,4 +67,5 @@ def get_all_posts(db: Session = Depends(get_db)):
 
 @app.get("/posts/{id}")
 def get_post_by_id(id: int, db: Session = Depends(get_db)):
+    db.query(posts.Post).filter(posts.Post.id == id).join()
     return db.query(posts.Post).filter(posts.Post.id == id).first()
