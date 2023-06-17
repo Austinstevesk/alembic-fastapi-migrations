@@ -5,37 +5,12 @@ from geoalchemy2 import Geometry
 
 from .db.sql import engine, get_db
 from .models import posts
+from .schemas.posts import Post, PostOut
 
 
 app = FastAPI()
 
 posts.Base.metadata.create_all(bind=engine)
-
-
-class Post(BaseModel):
-    title: str
-    content: str
-    published: bool = True
-    
-    
-    class Config:
-        orm_mode = True
-
-class User(BaseModel):
-    email: str
-    first_name: str
-    last_name: str
-    
-    class Config:
-        orm_mode = True
-
-
-class PostOut(Post):
-    owner: User
-    
-    class Config:
-        orm_mode = True
-        
 
 class WeatherSource(BaseModel):
     location:Geometry
